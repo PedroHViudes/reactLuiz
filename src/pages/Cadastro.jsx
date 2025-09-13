@@ -24,7 +24,7 @@ export default function Cadastro() {
     }
 
 
-    { {/*  */ } }
+    { {/*  OnChange={(e) => SetConfirmarsenha(e.target.value)}*/ } }
 
     return (
 

@@ -24,7 +24,40 @@ export default function Cadastro() {
     }
 
 
-    { {/*  OnChange={(e) => SetConfirmarsenha(e.target.value)}*/ } }
+    {/*  OnChange={(e) => SetConfirmarsenha(e.target.value)}*/ }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+
+        if (senha != confirmarsenha) {
+            alert("Senha e Confirmar senha não são iguals ")
+            return;
+        }
+        const usuario = {
+            "nome": nome,
+            "email": email,
+            "senha": senha,
+
+        }
+        console.log("AUIKASDHUAIS")
+
+        if (localStorage.getItem("usuariosCadastrados") != null) {
+
+            const usuarios = JSON.parse(localStorage.getItem("usuariosCadastrados"));
+            usuarios.push(usuario)
+            localStorage.setItem("usuariosCadastrados", JSON.stringify(usuarios))
+
+        }
+        else {
+            const usuariosCadastrados = []
+            usuariosCadastrados.push(usuario);
+            localStorage.setItem("usuariosCadastrados", JSON.stringify(usuariosCadastrados))
+
+        }
+    }
+
+
 
     return (
 
@@ -37,7 +70,7 @@ export default function Cadastro() {
                     <div id="cadastro-page" className="page">
                         <div className="card">
                             <h1>Cadastro de Usuário</h1>
-                            <form id="usuario-form">
+                            <form id="usuario-form" onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="nome">Nome Completo</label>
                                     <input type="text" id="nome" value={nome} onChange={alterarNome} required />
@@ -54,7 +87,7 @@ export default function Cadastro() {
                                     <label htmlFor="confirmar-senha">Confirmar Senha</label>
                                     <input type="password" id="confirmar-senha" value={confirmarsenha} onChange={alterarConfirmarSenha} required />
                                 </div>
-                                <button type="button" >
+                                <button type="submit" >
                                     Cadastrar
                                 </button>
                             </form>
